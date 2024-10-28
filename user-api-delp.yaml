@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-api-depl
+  labels:
+    app: user-api_label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-api_label
+  template:
+    metadata:
+      labels:
+        app: user-api_label
+    spec:
+      containers:
+      - name: user-api-image
+        image: natn2003/userapi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_HTTP_PORTS
+          value: "8080"
+        - name: MongoDbConfig__Host
+          value: "mongodb"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-api
+spec:
+  type: LoadBalancer
+  selector:
+    app: user-api_label
+  ports:
+  - protocol: TCP
+    port: 6004
+    targetPort: 8080
+    nodePort: 32007
