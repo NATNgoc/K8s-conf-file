@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basket-api-depl
+  labels:
+    app: basket-api_label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basket-api_label
+  template:
+    metadata:
+      labels:
+        app: basket-api_label
+    spec:
+      containers:
+      - name: basket-api-image
+        image: natn2003/basketapi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_HTTP_PORTS
+          value: "8080"
+        - name: ConnectionStrings__DefaultConnectionString
+          value: "Server=basketdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true"
+        - name: ConnectionStrings__Redis
+          value: "distributedcache:6379"
+        - name: GrpcSettings__DiscountUrl
+          value: "https://discount-api:8081"
+        - name: MessageBroker__Host
+          value: "amqp://ecommerce-mq:5672"
+        - name: MessageBroker__UserName
+          value: "guest"
+        - name: MessageBroker__Password
+          value: "guest"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: basket-api
+spec:
+  type: LoadBalancer
+  selector:
+    app: basket-api_label
+  ports:
+  - protocol: TCP
+    port: 6001
+    targetPort: 8080
+    nodePort: 32006
