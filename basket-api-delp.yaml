@@ -27,7 +27,7 @@ spec:
         - name: ConnectionStrings__Redis
           value: "distributedcache:6379"
         - name: GrpcSettings__DiscountUrl
-          value: "https://discount-api:8081"
+          value: "http://discount-api:6002"
         - name: MessageBroker__Host
           value: "amqp://ecommerce-mq:5672"
         - name: MessageBroker__UserName
