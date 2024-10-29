@@ -7,12 +7,12 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # File paths
-EXTERNAL_COMPONENTS_YAML="./external-components.yaml"
-CATALOG_SERVICE_YAML="./catalog-service.yaml"
-ORDER_SERVICE_YAML="./order-service.yaml"
-DISCOUNT_SERVICE_YAML="./discount-service.yaml"
-BASKET_SERVICE_YAML="./basket-service.yaml"
-USER_SERVICE_YAML="./user-service.yaml"
+EXTERNAL_COMPONENTS_YAML="./external-image-delp.yaml"
+CATALOG_SERVICE_YAML="./catalog-api-delp.yaml"
+ORDER_SERVICE_YAML="./ordering-api-delp.yaml"
+DISCOUNT_SERVICE_YAML="./discount-api-delp.yaml"
+BASKET_SERVICE_YAML="./basket-api-delp.yaml"
+USER_SERVICE_YAML="./user-api-delp.yaml"
 
 # Function to display welcome message
 function welcome() {
