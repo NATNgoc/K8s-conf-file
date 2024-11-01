@@ -38,11 +38,9 @@ kind: Service
 metadata:
   name: ordering-api
 spec:
-  type: LoadBalancer
   selector:
     app: ordering-api_label
   ports:
   - protocol: TCP
     port: 6003
     targetPort: 8080
-    nodePort: 32001

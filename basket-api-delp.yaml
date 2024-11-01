@@ -40,11 +40,9 @@ kind: Service
 metadata:
   name: basket-api
 spec:
-  type: LoadBalancer
   selector:
     app: basket-api_label
   ports:
   - protocol: TCP
     port: 6001
     targetPort: 8080
-    nodePort: 32006

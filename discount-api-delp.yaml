@@ -30,11 +30,9 @@ kind: Service
 metadata:
   name: discount-api
 spec:
-  type: LoadBalancer
   selector:
     app: discount-api_label
   ports:
   - protocol: TCP
     port: 6002
     targetPort: 8080
-    nodePort: 32002
