@@ -138,8 +138,10 @@ spec:
         env:
         - name: ACCEPT_EULA
           value: "Y"
-        - name: SA_PASSWORD
+        - name: MSSQL_SA_PASSWORD
           value: "SwN12345678"
+        securityContext:
+          runAsUser: 0
 ---
 apiVersion: v1
 kind: Service
@@ -152,6 +154,7 @@ spec:
   - protocol: TCP
     port: 1433
     targetPort: 1433
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -211,9 +214,9 @@ spec:
         - containerPort: 15672
         env:
         - name: RABBITMQ_DEFAULT_USER
-          value: guest
+          value: "guest"
         - name: RABBITMQ_DEFAULT_PASS
-          value: guest
+          value: "guest"
 ---
 apiVersion: v1
 kind: Service
