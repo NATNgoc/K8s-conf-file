@@ -26,6 +26,13 @@ spec:
           value: postgres
         - name: POSTGRES_DB
           value: CatalogDb
+        volumeMounts:
+        - name: catalog-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: catalog-storage
+        persistentVolumeClaim:
+          claimName: catalog-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -67,6 +74,13 @@ spec:
           value: postgres
         - name: POSTGRES_DB
           value: BasketDb
+        volumeMounts:
+        - name: basket-storage
+          mountPath: /var/lib/postgresql/data
+    volumes:
+      - name: basket-storage
+        persistentVolumeClaim:
+          claimName: basket-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -140,8 +154,13 @@ spec:
           value: "Y"
         - name: MSSQL_SA_PASSWORD
           value: "SwN12345678"
-        securityContext:
-          runAsUser: 0
+        volumeMounts:
+        - name: order-storage
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: order-storage
+        persistentVolumeClaim:
+          claimName: order-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -177,6 +196,13 @@ spec:
         image: mongo
         ports:
         - containerPort: 27017
+        volumeMounts:
+        - name: user-storage
+          mountPath: /data/db
+      volumes:
+      - name: user-storage
+        persistentVolumeClaim:
+          claimName: user-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -217,6 +243,13 @@ spec:
           value: "guest"
         - name: RABBITMQ_DEFAULT_PASS
           value: "guest"
+        volumeMounts:
+        - name: rabbitmq-storages
+          mountPath: /var/lib/rabbitmq
+      volumes:
+      - name: rabbitmq-storage
+        persistentVolumeClaim:
+          claimName: rabbitmq-pvc
 ---
 apiVersion: v1
 kind: Service
