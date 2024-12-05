@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.app.name }}-depl"
+  namespace: "{{ .Values.namespace }}"
+  labels:
+    app: "{{ .Values.app.name }}-label"
+spec:
+  replicas: {{ .Values.replica }}
+  selector:
+    matchLabels:
+      app: "{{ .Values.app.name }}-label"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.app.name }}-label"
+    spec:
+      containers:
+        - name: "{{ .Values.app.name }}-image"
+          image: "{{ .Values.dockerImage.host }}/{{ .Values.dockerImage.name }}:{{ .Values.dockerImage.version }}"
+          ports:
+            - containerPort: {{ .Values.dockerImage.port }}
+          env: |-
+            {{- range .Values.envs }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}

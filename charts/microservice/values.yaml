@@ -1,0 +1,18 @@
+namespace: "default"  # Namespace for the microservice
+app:
+  name: "myapp"
+  port: 8080
+
+replica: 3
+
+dockerImage:
+  host: "docker.io"
+  name: "myapp"
+  version: "latest"
+  port: 8080
+
+envs:
+  - name: "ENV_VAR1"
+    value: "value1"
+  - name: "ENV_VAR2"
+    value: "value2"

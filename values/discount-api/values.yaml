@@ -1,0 +1,18 @@
+namespace: "default"
+app:
+  name: "discount"
+  port: 6002
+
+replica: 1
+
+dockerImage:
+  host: "docker.io/natn2003"
+  name: "discountgrpc"
+  version: "latest"
+  port: 8080
+
+envs:
+  - name: "ASPNETCORE_HTTP_PORTS"
+    value: "8080"
+  - name: "ConnectionStrings__DefaultConnectionString"
+    value: "Data Source=discountdb" 
