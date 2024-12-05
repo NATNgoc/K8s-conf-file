@@ -19,9 +19,9 @@ spec:
         - name: "{{ .Values.app.name }}-image"
           image: "{{ .Values.dockerImage.host }}/{{ .Values.dockerImage.name }}:{{ .Values.dockerImage.version }}"
           ports:
-            - containerPort: {{ .Values.dockerImage.port }}
-          env: |-
-            {{- range .Values.envs }}
-            - name: {{ .name }}
-              value: {{ .value | quote }}
-            {{- end }}
+          - containerPort: {{ .Values.dockerImage.port }}
+          env:
+          {{- range .Values.envs }}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+          {{- end }}

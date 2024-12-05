@@ -29,7 +29,7 @@ spec:
           value: CatalogDb
         volumeMounts:
         - name: catalog-storage
-          mountPath: /var/lib/postgresql/data
+          mountPath: /var/lib/postgresql
       volumes:
       - name: catalog-storage
         persistentVolumeClaim:
@@ -79,8 +79,8 @@ spec:
           value: BasketDb
         volumeMounts:
         - name: basket-storage
-          mountPath: /var/lib/postgresql/data
-    volumes:
+          mountPath: /var/lib/postgresql
+      volumes:
       - name: basket-storage
         persistentVolumeClaim:
           claimName: basket-pvc
@@ -151,6 +151,13 @@ spec:
       labels:
         app: orderdb_label
     spec:
+      initContainers:
+        - name: fix-perms
+          image: busybox
+          command: ['sh', '-c', 'chown -R 10001:0 /var/opt/mssql']
+          volumeMounts:
+          - name: order-storage
+            mountPath: /var/opt/mssql
       containers:
       - name: orderdb-mssql
         image: mcr.microsoft.com/mssql/server
@@ -255,7 +262,7 @@ spec:
         - name: RABBITMQ_DEFAULT_PASS
           value: "guest"
         volumeMounts:
-        - name: rabbitmq-storages
+        - name: rabbitmq-storage
           mountPath: /var/lib/rabbitmq
       volumes:
       - name: rabbitmq-storage

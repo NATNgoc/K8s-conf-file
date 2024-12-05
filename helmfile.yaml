@@ -1,0 +1,51 @@
+releases:
+  - name: external-service
+    chart: charts/external-service
+    values:
+      - values/external-service/values.yaml
+
+  - name: catalog-api
+    chart: charts/microservice
+    values:
+      - values/catalog-api/values.yaml
+    needs:
+      - external-service
+
+  - name: basket-api
+    chart: charts/microservice
+    values:
+      - values/basket-api/values.yaml
+    needs:
+      - external-service
+
+  - name: discount-api
+    chart: charts/microservice
+    values:
+      - values/discount-api/values.yaml
+    needs:
+      - external-service
+
+  - name: ordering-api
+    chart: charts/microservice
+    values:
+      - values/ordering-api/values.yaml
+    needs:
+      - external-service
+
+  - name: user-api
+    chart: charts/microservice
+    values:
+      - values/user-api/values.yaml
+    needs:
+      - external-service
+    
+  - name: loadbalancer
+    chart: charts/loadbalancer
+    values:
+      - values/loadbalancer/values.yaml
+    needs:
+      - catalog-api
+      - basket-api
+      - discount-api
+      - ordering-api
+      - user-api
