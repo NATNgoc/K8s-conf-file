@@ -6,10 +6,12 @@ app:
 replica: 1
 
 dockerImage:
-  host: "docker.io/natn2003"
+  host: "registry.digitalocean.com/microservices-registry-uit"
   name: "discountgrpc"
   version: "latest"
   port: 8080
+
+registrySecret: microservices-registry-uit 
 
 envs:
   - name: "ASPNETCORE_HTTP_PORTS"

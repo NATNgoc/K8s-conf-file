@@ -6,10 +6,10 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.storageClassName }}
+  storageClassName: do-block-storage
   resources:
     requests:
-      storage: {{ .Values.storageVolume }}
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -19,10 +19,10 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.storageClassName }}
+  storageClassName: do-block-storage
   resources:
     requests:
-      storage: {{ .Values.storageVolume }}
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -32,10 +32,10 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.storageClassName }}
+  storageClassName: do-block-storage
   resources:
     requests:
-      storage: {{ .Values.storageVolume }}
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -45,10 +45,10 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.storageClassName }}
+  storageClassName: do-block-storage
   resources:
     requests:
-      storage: {{ .Values.storageVolume }}
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -58,7 +58,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.storageClassName }}
+  storageClassName: do-block-storage
   resources:
     requests:
-      storage: {{ .Values.storageVolume }}
+      storage: 1Gi

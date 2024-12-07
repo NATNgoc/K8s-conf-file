@@ -1,51 +1,75 @@
 releases:
-  - name: external-service
+  - name: blue-volume-claim
+    chart: charts/volumeClaim
+    values:
+      - values/volumeClaim/values.yaml
+      - namespace: blue
+
+  - name: blue-external
     chart: charts/external-service
     values:
       - values/external-service/values.yaml
+      - namespace: blue
+    needs:
+      - blue-volume-claim
 
-  - name: catalog-api
+  - name: blue-catalog-api
     chart: charts/microservice
     values:
       - values/catalog-api/values.yaml
+      - namespace: blue
     needs:
-      - external-service
+      - blue-external
 
-  - name: basket-api
+  - name: blue-basket-api
     chart: charts/microservice
     values:
       - values/basket-api/values.yaml
+      - namespace: blue
     needs:
-      - external-service
+      - blue-external
 
-  - name: discount-api
+  - name: blue-discount-api
     chart: charts/microservice
     values:
       - values/discount-api/values.yaml
+      - namespace: blue
     needs:
-      - external-service
+      - blue-external
 
-  - name: ordering-api
+  - name: blue-ordering-api
     chart: charts/microservice
     values:
       - values/ordering-api/values.yaml
+      - namespace: blue
     needs:
-      - external-service
+      - blue-external
 
-  - name: user-api
+  - name: blue-user-api
     chart: charts/microservice
     values:
       - values/user-api/values.yaml
+      - namespace: blue
     needs:
-      - external-service
+      - blue-external
     
-  - name: loadbalancer
-    chart: charts/loadbalancer
-    values:
-      - values/loadbalancer/values.yaml
-    needs:
-      - catalog-api
-      - basket-api
-      - discount-api
-      - ordering-api
-      - user-api
+  # - name: loadbalancer
+  #   chart: charts/loadbalancer
+  #   needs:
+  #     - blue-catalog-api
+  #     - blue-basket-api
+  #     - blue-discount-api
+  #     - blue-ordering-api
+  #     - blue-user-api
+
+  # - name: ingressrule
+  #   chart: charts/ingressrule
+  #   values:
+  #     - values/ingressrule/values.yaml
+  #     - namespace: blue
+  #   needs:
+  #     - blue-catalog-api
+  #     - blue-basket-api
+  #     - blue-discount-api
+  #     - blue-ordering-api
+  #     - blue-user-api

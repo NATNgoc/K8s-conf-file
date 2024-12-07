@@ -11,6 +11,8 @@ dockerImage:
   version: "latest"
   port: 8080
 
+# registrySecret: "myregistrysecret"
+
 envs:
   - name: "ENV_VAR1"
     value: "value1"
